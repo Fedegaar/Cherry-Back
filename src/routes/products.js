@@ -53,4 +53,18 @@ router.get('/products/:id', async (req, res) => {
     }
 })
 
+// RUTA GET PARA BUSCAR PRODUCTOS POR NOMBRE
+router.get("/productsByName/:id", async (req, res) => {
+    const { id } = req.params;
+    const { name } = req.query;
+    try {
+      const search = await productSchema.find({
+        _id: id,
+        name: new RegExp(name.toLowerCase(), "i"),
+      });
+      res.status(200).json(search);
+    } catch (error) {
+      res.status(404).json({ message: error });
+    }
+  });
 module.exports = router;
