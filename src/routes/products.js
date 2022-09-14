@@ -6,7 +6,7 @@ const router = Router();
 
 //RUTA POST PARA CREAR UN PRODUCTO
 router.post('/new', (req, res) => {
-    const {name, image, description, presentation, price, actives} = req.body
+    const {name, image, description, presentation, price, actives, available} = req.body
 
     try {        
         const newProduct = new productSchema({
@@ -16,6 +16,7 @@ router.post('/new', (req, res) => {
             presentation,
             price,
             actives,
+            available,
         })
         const savedProduct = newProduct.save();
         res.status(200).json(savedProduct)

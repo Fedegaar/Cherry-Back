@@ -27,7 +27,12 @@ const productSchema = new Schema(
         actives: {
             type: String,
             required: true,
-        },
+        },        
+        available:
+        {
+            type:Boolean,
+            required: true,
+        }
     },
     { collection: "products" }
 );
