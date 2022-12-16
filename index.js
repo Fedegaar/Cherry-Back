@@ -1,7 +1,8 @@
 const express = require('express')
 const mongoose = require("mongoose")
 require("dotenv").config()
-const routes = require('./src/routes/products')
+const productsRoutes = require('./src/routes/products')
+const servicesRoutes = require('./src/routes/services')
 const app = express()
 // app.use(cors())
 app.use(express.json())
@@ -16,7 +17,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/', routes)
+app.use('/', productsRoutes, servicesRoutes)
 
 mongoose
     .connect(process.env.MONGODB_URI)
