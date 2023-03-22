@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const url = 'https://i.ibb.co/Ch2THGz/CHERRY-W-B-CARD.png'
 const family = ['Vitamina C', 'Alpine Roses', 'Serum', 'KNB', 'KIKI']
+const marks = ['Idraet', 'Lidherma', 'Icono', "Anza"]
 
 const productSchema = new Schema(
     {
@@ -36,6 +37,11 @@ const productSchema = new Schema(
         {
             type: Boolean,
             required: true,
+        },
+        mark: {
+            type: String,
+            enum: marks,
+            required: true
         }
     },
     { collection: "products" }

@@ -37,12 +37,12 @@ router.get('/allservices', async (req, res) => {
 })
 
 
-//RUTA POST PARA OBTENER UN PRODUCTO ESPECIFICO CON EL ID
+//RUTA POST PARA OBTENER UN SERVICIO ESPECIFICO CON EL ID
 router.get('/service/:id', async (req, res) => {
     const { id } = req.params
     let serv
     try {
-        serv = await serviceSchema.find({ _id: id })
+        serv = await serviceSchema.findById({ _id: id })
         res.status(200).json(serv)
         console.log("ESTE ES EL SERVICIO", serv)
     } catch (error) {
@@ -50,7 +50,7 @@ router.get('/service/:id', async (req, res) => {
     }
 })
 
-// // RUTA GET PARA BUSCAR PRODUCTOS POR NOMBRE
+// // RUTA GET PARA BUSCAR SERVICIOS POR NOMBRE
 // router.get("/search/", async (req, res) => {
 //     // const { id } = req.params;
 //     const { name } = req.query;
@@ -79,7 +79,7 @@ router.put("/updateserv/:id", async (req, res) => {
         .catch((error) => res.status(404).json({ message: error }));
 });
 
-// RUTA DELETE PARA ELIMINAR UN PRODUCTO
+// RUTA DELETE PARA ELIMINAR UN SERVICIO
 
 router.delete("/deleteserv/:id", async (req, res) => {
     const { id } = req.params;

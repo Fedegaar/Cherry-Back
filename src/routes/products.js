@@ -6,7 +6,7 @@ const router = Router();
 
 //RUTA POST PARA CREAR UN PRODUCTO
 router.post('/new', (req, res) => {
-    const { name, image, description, presentation, price, active, available } = req.body
+    const { name, image, description, presentation, price, active, available, mark } = req.body
 
     try {
         const newProduct = new productSchema({
@@ -17,6 +17,7 @@ router.post('/new', (req, res) => {
             price,
             active,
             available,
+            mark,
         })
         const savedProduct = newProduct.save();
         res.status(200).json(savedProduct)
@@ -43,7 +44,7 @@ router.get('/product/:id', async (req, res) => {
     const { id } = req.params
     let prod
     try {
-        prod = await productSchema.find({ _id: id })
+        prod = await productSchema.findById({ _id:id })
         res.status(200).json(prod)
         console.log("ESTE ES EL PRODUCTO", prod)
     } catch (error) {
@@ -60,11 +61,10 @@ router.get("/search/", async (req, res) => {
         const search = await productSchema.find({
             name: new RegExp(name.toLowerCase(), "i"),
         });
-        res.status(200).json(search);
-        console.log(search, "soy search")
+        res.status(200).json(search);        
     } catch (error) {
         res.status(404).json({ message: error });
-        console.log(error, "soy el error")
+        
     }
 });
 
